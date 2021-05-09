@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]>
+<!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+
+	<!-- Basic Page Needs
+  ================================================== -->
+	<meta charset="utf-8">
+	<title>Design Bee studio</title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+
+	<!-- Mobile Specific Metas
+  ================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- CSS
+  ================================================== -->
+	<!--<link rel="stylesheet" href="css/base.css"/>-->
+	<link rel="stylesheet" href="css/skeleton.css"/>
+	<link rel="stylesheet" href="css/project.css"/>
+	
+    <!--[if lte IE 8]>
+        <script src="js/html5.js"></script>
+    <![endif]-->		
+		
+	<!-- Favicons
+	================================================== -->
+	<link rel="shortcut icon" href="favicon.png">
+	<link rel="apple-touch-icon" href="apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114x114.png">
+
+	<!--Scocial Media Icons
+	================================================= -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script type="text/javascript" src="js/jquery.js"></script>
+
+	<style>
+		* {
+		  box-sizing: border-box;
+		}
+		
+		/* Add a gray background color with some padding */
+		body {
+		  font-family: Arial;
+		  padding: 20px;
+		  background: #f1f1f1;
+		}
+		
+		/* Header/Blog Title */
+		.header {
+		  padding: 30px;
+		  font-size: 30px;
+		  text-align: center;
+		  background: white;
+		  font-family: 'Times New Roman', Times, serif;
+		}
+		
+		/* Create two unequal columns that floats next to each other */
+		/* Left column */
+		.leftcolumn {   
+		  float: left;
+		  width: 75%;
+		}
+		
+		/* Right column */
+		.rightcolumn {
+		  float: left;
+		  width: 25%;
+		  padding-left: 20px;
+		}
+		
+		/* Fake image */
+		.fakeimg {
+		  background-color: #aaa;
+		  width: 100%;
+		  padding: 20px;
+		}
+		
+		/* Add a card effect for articles */
+		.card {
+		   background-color: white;
+		   padding: 20px;
+		   margin-top: 20px;
+		}
+		
+		/* Clear floats after the columns */
+		.row:after {
+		  content: "";
+		  display: table;
+		  clear: both;
+		}
+		
+		/* Footer */
+		.footer {
+		  padding: 20px;
+		  text-align: center;
+		  background: #ddd;
+		  margin-top: 20px;
+		}
+		
+		/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+		@media screen and (max-width: 800px) {
+		  .leftcolumn, .rightcolumn {   
+			width: 100%;
+			padding: 0;
+		  }
+		}
+
+
+		/*For Scocial Media Icons*/
+		.fa {
+  			padding: 20px;
+  			font-size: 30px;
+  			width: 70px;
+  			text-align: center;
+  			text-decoration: none;
+  			margin: 5px 2px;
+  			border-radius: 50%;
+		}
+
+		.fa:hover {
+    		opacity: 0.7;
+		}
+
+		.fa1:hover {
+    		opacity: 0.7;
+			cursor: pointer;
+		}
+
+		.fa-facebook {
+  			background: #3B5998;
+  			color: white;
+		}
+
+		.fa-youtube {
+  			background: #bb0000;
+  			color: white;
+		}
+
+		.fa-instagram {
+  			background: #125688;
+  			color: white;
+		}
+	</style>
+
+	<script>
+		const url1 = "/blog/getdata";
+		fetch(url1)
+			.then(function (response) {
+				return response.json();
+			})
+			.then(function (data) {
+
+				var vid_url;
+				
+				
+				for(var i=0; i<data.length; i++){
+					if(data[i].content_type == 'image') {
+						$('#left_content').append('<div class="card"> <img src="https://designbeestudio.in/' + data[i].id + '_blog_picture.jpg"  style="height:200px;" />' + data[i].blog_content + '</div>');
+					}else{
+						vid_url =  data[i].video_link;
+						$('#left_content').append('<div class="card"> <iframe width="100%" height="200" src="' + vid_url + '"></iframe>' + data[i].blog_content + '</div>');
+						//$('#left_content').append("<div class='card'> <iframe width='100%' height='200' src='https://www.youtube.com/embed/tgbNymZ7vqY'></iframe>" + data[i].blog_content + "</div>");
+
+					}
+				}
+				
+				
+			})
+			.catch(function (err) {
+				console.log('error: ' + err);
+			});
+	</script>
+</head>
+<body>
+
+
+	<!-- Primary Page Layout
+	================================================== -->
+	
+	<div id="preloader">
+		<div id="status">&nbsp;</div>
+	</div>	
+
+
+		<div class="header">
+			<h2>OUR BLOGS</h2>
+		</div>
+		
+		<div class="row">
+			<div id="left_content" class="leftcolumn">
+				<!--<div class="card">
+					<h2>TITLE HEADING</h2>
+					<h4>Title description, Dec 7, 2017</h4>
+					<br>
+					<div class="fakeimg" style="height:200px;">Image</div>
+					<p>Some text..</p>
+					<p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+			  	</div>
+			  	<div class="card">
+					<h2>TITLE HEADING</h2>
+					<h4>Title description, Sep 2, 2017</h4>
+					<br>
+					<div class="fakeimg" style="height:200px;">Image</div>
+					<p>Some text..</p>
+					<p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+			  	</div>-->
+			</div>
+			<div class="rightcolumn">
+			  	<!--<a href="/" style="text-decoration: none; color: black;">
+					<div class="card fa1">
+						<h2>About Us</h2>
+						<br>
+						<div class="fakeimg" style="height:100px;">Image</div>
+						<br>
+						<p>Some text about me in culpa qui officia deserunt mollit anim..</p>
+			  		</div>
+				</a>-->
+			  	<!--<div class="card">
+					<h2>Related Post</h2>
+					<br>
+					<div class="fakeimg fa1">Image</div><br>
+					<div class="fakeimg fa1">Image</div><br>
+					<div class="fakeimg fa1">Image</div>
+			  	</div>-->
+			  	<div class="card">
+					<h2>Follow Us on..</h2>
+					<br>
+					<a href="https://www.facebook.com/designbeestudio.in" class="fa fa-facebook"></a>
+					<a href="https://www.youtube.com/channel/UCQrTeF2PCVY2ab-5ArBDXHg/featured" class="fa fa-youtube"></a>
+					<a href="https://instagram.com/design_bee_studio?igshid=1j74hmzi0tdl6" class="fa fa-instagram"></a>
+			  	</div>
+			</div>
+		</div>
+		<div class="sixteen columns">
+			<div class="link-project"><div class="cl-effect-14"><a href="/"><span>visit website</span></a></div></div>	
+		</div>
+	
+	
+	<!-- JAVASCRIPT
+    ================================================== -->
+  
+	
+	<script type="text/javascript" src="js/modernizr.custom.js"></script>
+	<script type="text/javascript" src="js/jquery.bxslider.min.js"></script>
+	<script type="text/javascript">
+		//Preloader
+		
+		$(window).load(function() {
+			$("#status").fadeOut();
+			$("#preloader").delay(350).fadeOut("slow");
+		})  
+
+
+
+
+		//Slider	
+
+			$(document).ready(function(){
+				$('.bxslider').bxSlider({
+					adaptiveHeight: true,
+					touchEnabled: true,
+					pager: false,
+					controls: true,
+					auto: true,
+					slideMargin: 1
+				});
+			});	
+	</script>
+
+	<!-- End Document
+	================================================== -->
+</body>
+</html>	
